@@ -44,6 +44,16 @@ end
     assert rounded_abc_size(source) == 1.41 # sqrt(1*1 + 1*1 + 0) = 1.41
   end
 
+  test "it should return the correct ABC size for strings with interpolation in fun call" do
+    source =
+"""
+def fun(arg) do
+  "str with \#{arg}"
+end
+"""
+    assert abc_size(source) == 0
+  end
+
   test "it should return the correct ABC size /3" do
     source =
 """
@@ -80,11 +90,6 @@ end
 """
     assert rounded_abc_size(source) == 5.48  # sqrt(1*1 + 5*5 + 2*2) = 5.48
   end
-
-
-
-
-
 
   test "it should NOT report expected code" do
 """
